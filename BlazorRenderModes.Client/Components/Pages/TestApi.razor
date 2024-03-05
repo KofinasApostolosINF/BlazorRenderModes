@@ -4,7 +4,7 @@
 @inject HttpClient Http
 @rendermode RenderMode.InteractiveAuto
 
-<h1 class="text-center mt-5 display-3">Popular Movies</h1>
+<h1 class="text-center mt-5 display-3">Movie Details for id 550.</h1>
 
 <div class="container-xl">
     @if (RawApiResponse is null)
@@ -20,14 +20,6 @@
     }
     else
     {
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 g-3 justify-content-center justify-content-xl-start">
-            @foreach (var movie in MovieResponse.Results.Take(8))
-            {
-                <div class="col" @key="movie.Id">
-                    <MovieCard PopularMovie="movie" ModalId="movie-modal" OnBtnClick="GetMovieDetails" />
-                </div>
-            }
-        </div>
         <MovieModal MovieDetails="MovieDetails" />
     }
 
