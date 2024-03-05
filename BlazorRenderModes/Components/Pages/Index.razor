@@ -1,4 +1,5 @@
-﻿@page "/"
+﻿@* Index.razor *@
+@page "/"
 
 <PageTitle>Home</PageTitle>
 
@@ -7,7 +8,7 @@
     <div class="row mt-3 border shadow">
         <h2>Server Side Rendered (SSR)</h2>
         <div class="col-6">
-            <h4><a href="/movies/ssr">Movies (SSR)</a></h4>
+            <h4><a href="/movies/ssr">Movies (SSR)</a></h4> @* SSR *@
             <div>
                 <code>(No rendering attribute)</code>
             </div>
@@ -27,7 +28,7 @@
 
         </div>
         <div class="col-6">
-            <h4><a href="/movies/stream">Movies (Stream)</a></h4>
+            <h4><a href="/movies/stream">Movies (Stream)</a></h4> @* STREAM *@
             <div>
                 <code>@("@attribute [StreamRendering]")</code>
             </div>
@@ -79,7 +80,7 @@
     <div class="row mt-3 border shadow">
         <h2>Blazor Server with SignalR</h2>
         <div class="col-12">
-            <h4><a href="/movies/signalr">Movies (SignalR)</a></h4>
+            <h4><a href="/movies/signalr">Movies (SignalR) </a></h4> @* SignalR - InteractiveServer *@
             <div>
                 <code>@("@rendermode RenderMode.InteractiveServer")</code>
             </div>
@@ -131,7 +132,7 @@
     <div class="row mt-3 border shadow">
         <h2>Blazor WASM</h2>
         <div class="col-6">
-            <h4><a href="/movies/wasm">Movies (WASM)</a></h4>
+            <h4><a href="/movies/wasm">Movies (WASM)</a></h4> @* WASM - InteractiveWebAssembly *@
             <div>
                 <code>@("@rendermode RenderMode.InteractiveWebAssembly")</code>
             </div>
@@ -152,7 +153,7 @@
             </p>
         </div>
         <div class="col-6">
-            <h4><a href="/movies/auto">Movies (Auto)</a></h4>
+            <h4><a href="/movies/auto">Movies (Auto)</a></h4> @* AUTO - INTERACTIVEAUTO *@
             <div>
                 <code>@("@rendermode RenderMode.InteractiveAuto")</code>
             </div>

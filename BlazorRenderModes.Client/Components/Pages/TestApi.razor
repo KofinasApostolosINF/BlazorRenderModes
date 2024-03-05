@@ -1,26 +1,22 @@
-﻿@using BlazorRenderModes.Client.Models;
+﻿@* TestApi.razor *@
+@using BlazorRenderModes.Client.Models;
 @using System.Text.Json
 @page "/movies/testapi"
 @inject HttpClient Http
-@rendermode RenderMode.InteractiveAuto
 
-<h1 class="text-center mt-5 display-3">Movie Details for id 550.</h1>
+
+<h1 class="text-center mt-5 display-3">Test Api for Movie Details</h1>
 
 <div class="container-xl">
-    @if (RawApiResponse is null)
+    @if (RawApiResponse is not null)
     {
         <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 g-3 justify-content-center justify-content-xl-start">
-            @for (int i = 1; i <= 8; i++)
-            {
-                <div class="col">
-                    <MovieCard />
-                </div>
-            }
+            <div class="col">
+                <h2>@MovieDetails.Title</h2>
+                <p>@MovieDetails.Overview</p>
+                <p>Release Date: @MovieDetails.ReleaseDate</p>
+            </div>
         </div>
-    }
-    else
-    {
-        <MovieModal MovieDetails="MovieDetails" />
     }
 
     <button class="btn btn-primary" @onclick="RefreshData">Refresh Data</button>
@@ -43,23 +39,8 @@
         if (RawApiResponse.IsSuccessStatusCode)
         {
             var content = await RawApiResponse.Content.ReadAsStringAsync();
-            var movieDetails = JsonSerializer.Deserialize<MovieDetails>(content);
+            MovieDetails = JsonSerializer.Deserialize<MovieDetails>(content);
         }
-        else
-        {
-            // Handle error case if needed
-            // You might want to display an error message or log the error
-            // For simplicity, this example does not include error handling
-        }
-    }
-
-    private async Task GetMovieDetails(int id)
-    {
-        MovieDetails = null;
-        StateHasChanged();
-        id = 550;
-        MovieDetails = await Http.GetFromJsonAsync<MovieDetails>($"https://api.themoviedb.org/3/movie/{id}?api_key=b2b90f9e1a4b1b08f3e57cd4db272957");
-        StateHasChanged();
     }
 
     private async Task RefreshData()
@@ -67,8 +48,5 @@
         await LoadMovieData();
         StateHasChanged();
     }
-
-
 }
-
 

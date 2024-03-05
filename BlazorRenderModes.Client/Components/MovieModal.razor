@@ -1,4 +1,6 @@
-﻿@using BlazorRenderModes.Client.Models
+﻿@* MovieModal.razor *@
+@using BlazorRenderModes.Client.Models
+
 
 <div class="modal fade" tabindex="-1" id="movie-modal">
     <div class="modal-dialog modal-dialog-centered modal-xl">
@@ -18,6 +20,7 @@
                     </div>
                 }
                 else
+
                 {
                     <div class="row">
                         <div class="col-md-4 ">
@@ -87,7 +90,12 @@
 </div>
 
 @code {
-
     [Parameter]
     public MovieDetails? MovieDetails { get; set; }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        // Additional logic or state changes can be handled here if needed
+        await base.OnParametersSetAsync();
+    }
 }

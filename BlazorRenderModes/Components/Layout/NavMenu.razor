@@ -1,4 +1,5 @@
-﻿<nav class="navbar navbar-expand-lg navbar-dark">
+﻿@* NavMenu.razor *@
+<nav class="navbar navbar-expand-lg navbar-dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="/">
             <img src="/img/BlazorMovieOrg.png" height="50" />
@@ -30,9 +31,12 @@
                 </li>
 
 
+                @* Call TestApi with nav button*@
                 <li class="nav-item">
-                    <NavLink class="nav-link" href="/movies/testapi" Match="NavLinkMatch.All">TestApi</NavLink>
+                    <NavLink class="nav-link" href="/movies/testapi" Match="NavLinkMatch.All">TestApi</NavLink> 
                 </li>
+
+
             </ul>
         </div>
     </div>

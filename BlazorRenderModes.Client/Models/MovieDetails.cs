@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+﻿//MovieDetails.cs
+using System.Text.Json.Serialization;
 
 namespace BlazorRenderModes.Client.Models
 {
