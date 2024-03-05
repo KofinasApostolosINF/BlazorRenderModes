@@ -1,12 +1,11 @@
 ﻿@* TestApi.razor *@
+@* @using BlazorRenderModes.Client.Components *@
 @using BlazorRenderModes.Client.Models;
-@using System.Text.Json
 @page "/movies/testapi"
 @inject HttpClient Http
-
+@* @rendermode - *@
 
 <h1 class="text-center mt-5 display-3">Test Api for Movie Details</h1>
-
 <div class="container-xl">
     @if (RawApiResponse is not null)
     {
@@ -14,19 +13,29 @@
             <div class="col">
                 <h2>@MovieDetails.Title</h2>
                 <p>@MovieDetails.Overview</p>
+                <p>Revenue: $@MovieDetails.Revenue</p>
+                <p>Runtime: @MovieDetails.Runtime minutes</p>
+                <p>Popularity: @MovieDetails.Popularity</p>
                 <p>Release Date: @MovieDetails.ReleaseDate</p>
+
+                <h3>Genres</h3>
+                <ul>
+                    @foreach (var genre in MovieDetails.Genres)
+                    {
+                        <li>@genre.Name</li>
+                    }
+                </ul>
             </div>
         </div>
     }
-
     <button class="btn btn-primary" @onclick="RefreshData">Refresh Data</button>
 </div>
 
+
 @code {
+    private MovieDetails MovieDetails { get; set; }
     private HttpResponseMessage RawApiResponse { get; set; }
     private PopularMovieResponse MovieResponse { get; set; }
-    private MovieDetails MovieDetails { get; set; }
-
     protected override async Task OnInitializedAsync()
     {
         await LoadMovieData();
@@ -35,11 +44,10 @@
     private async Task LoadMovieData()
     {
         RawApiResponse = await Http.GetAsync("https://api.themoviedb.org/3/movie/550?api_key=b2b90f9e1a4b1b08f3e57cd4db272957");
-
         if (RawApiResponse.IsSuccessStatusCode)
         {
             var content = await RawApiResponse.Content.ReadAsStringAsync();
-            MovieDetails = JsonSerializer.Deserialize<MovieDetails>(content);
+            MovieDetails = System.Text.Json.JsonSerializer.Deserialize<MovieDetails>(content);
         }
     }
 

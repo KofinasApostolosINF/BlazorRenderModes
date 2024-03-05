@@ -4,8 +4,7 @@ using System.Text.Json.Serialization;
 namespace BlazorRenderModes.Client.Models
 {
     public class MovieDetails
-    {
-        
+    {        
         [JsonPropertyName("adult")]
         public bool Adult { get; set; }
         
