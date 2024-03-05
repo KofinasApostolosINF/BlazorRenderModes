@@ -1,37 +1,27 @@
 using BlazorRenderModes.Client.Models;
 using Microsoft.AspNetCore.Mvc;
-using BlazorRenderModes.Client.Components.Pages;
 using BlazorRenderModes.Components;
+using System.Net.Http.Headers;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents()
     .AddInteractiveWebAssemblyComponents();
 
-// your TMDB Read Access key must be in the server's secrets.json, e.g.:
-//"TMDBKey": "your-API-key-here"
-//string? tmdbKey = builder.Configuration["TMDBKey"];
-
-//builder.Services.AddScoped(sp => {
-//    var client = new HttpClient();
-//    client.BaseAddress = new("https://api.themoviedb.org/3/");
-//    client.DefaultRequestHeaders.Authorization = new("Bearer", tmdbKey);
-//    return client;
-//});
-
-string tmdbApiKey = "b2b90f9e1a4b1b08f3e57cd4db272957zzzzzz";
+string tmdbApiKey = "b2b90f9e1a4b1b08f3e57cd4db272957";
 string tmdbReadAccessToken = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiMmI5MGY5ZTFhNGIxYjA4ZjNlNTdjZDRkYjI3Mjk1NyIsInN1YiI6IjY1ZTVjYjBhNDRhNDI0MDE2MzExOGM4ZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.dEPRMt7FykKb0iKPfDc5TJduRzQMxxkP5EthF4JXwkA";
 
 builder.Services.AddScoped(sp => {
     var client = new HttpClient();
-    client.BaseAddress = new("https://api.themoviedb.org/3/");
-    client.DefaultRequestHeaders.Authorization = new("Bearer", tmdbApiKey);
+    client.BaseAddress = new Uri("https://api.themoviedb.org/3/");
+    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", tmdbReadAccessToken);
+
     return client;
 });
 
 var app = builder.Build();
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
