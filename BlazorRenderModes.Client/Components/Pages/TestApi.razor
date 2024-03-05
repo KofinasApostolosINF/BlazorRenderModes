@@ -57,7 +57,7 @@
     {
         MovieDetails = null;
         StateHasChanged();
-
+        id = 550;
         MovieDetails = await Http.GetFromJsonAsync<MovieDetails>($"https://api.themoviedb.org/3/movie/{id}?api_key=b2b90f9e1a4b1b08f3e57cd4db272957");
         StateHasChanged();
     }
